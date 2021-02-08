@@ -12,7 +12,8 @@ urlpatterns = [
     path('my/game/<game_id>/remove', views.my_remove_game, name="mygame_remove"),
     path('player/<usr_id>/games', views.player_profile_games, name="player_games"),
     path('player/<int:usr_id>/game/<int:game_id>', views.player_profile_achievements, name="player_achievements"),
-    
+
+    path('api/profiles', views.api_list_profiles, name="api_list_profiles")
 ]
 
 

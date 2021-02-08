@@ -7,7 +7,9 @@ from django.urls import reverse
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.conf.urls import url
-
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
 
 
 
@@ -266,6 +268,28 @@ def list_profiles(request):
             profiles = User.objects.filter(username__contains=search)
 
     return render(request, 'players/player_list.html', {'profile_list': profiles, 'search': search})
+
+
+# Za interakciju sa Nodom
+def api_list_profiles(request):
+    search = None
+
+    if request.method == "GET" and request.GET.get('search',None) is not None:
+        search = request.GET.get('search')
+
+    if request.user.is_authenticated:
+        # Vrati listu bez mene
+        if search is None:
+            profiles = User.objects.exclude(id=request.user.id).values('id')
+        else:
+            profiles = User.objects.exclude(id=request.user.id).filter(username__contains=search).values('id')
+    else:
+        if search is None:
+            profiles = User.objects.all().values('id','username')
+        else:
+            profiles = User.objects.filter(username__contains=search).values('id')
+
+    return JsonResponse(list(profiles), safe=False)
 
 def parametri(request):
     for k,v in request.GET.items():
