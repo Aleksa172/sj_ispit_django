@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} {{ news.game.name }} News - {{ news.title }} {% endblock %}
+
+{% block content %}
+  <div class="container">
+    <p> <a href="{{ news.get_game_url }}"> &lt; Back to {{ news.game.name }}</a></p>
+
+    
+    <h1>{{ news.title }} </h1>
+    <h5> Published: {{ news.get_published_date }} </h5>
+    <p>
+      {{ news.content }}
+    </p>
+  </div>
+{% endblock %}

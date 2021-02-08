@@ -1,0 +1,64 @@
+body {
+    padding-bottom: 40px;
+}
+
+a.unlink {
+    color: inherit;
+}
+a.unlink:hover {
+    color: inherit;
+}
+
+.header-wrap {
+    position:relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-title {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    font-size: 36px;
+}
+
+.game-container {
+    margin-top: 30px;
+}
+
+.game-release-year {
+    font-size: 20px;
+}
+
+.steam-logo {
+    height:64px;
+    width: 64px;
+}
+
+.player-profile-container {
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+.profile-title {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    font-size: 28px;
+}
+
+.main-logo {
+    height: 64px;
+    width: 64px;
+}
+
+#footer {
+    position:fixed;
+    background: #0011ff;
+    height: 40px;
+    width: 100%;
+    bottom:0;
+}

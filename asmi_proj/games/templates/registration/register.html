@@ -1,0 +1,20 @@
+{% extends "../base.html" %}
+
+{% block title %} Achievementtrack - Register {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if success_message %}
+        <div class="alert alert-success" role="alert">
+            {{ success_message }}
+            <a href="{% url 'login' %}"> Login here </a>
+        </div>
+    {% endif %}
+    <form method="POST" action="{% url 'register' %}"class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+    <a href="{% url 'login' %}"> Login here </a>
+</div>
+{% endblock %}

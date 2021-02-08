@@ -1,0 +1,25 @@
+{% extends "../base.html" %}
+
+{% block title %} Achievementtrack - Login {% endblock %}
+
+{% block content %}
+<div class="container">
+{% if user.is_authenticated %}
+    But you are already logged in! So, you can either 
+    <a href="{% url 'logout' %}" class="btn btn-default" role="button">Logout</a>
+    
+        ... or ...
+    
+        <a href="{% url 'logout' %}" class="btn btn-default" role="button">Go back to your games</a>
+{% else %}
+    
+        <h2>Log In</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+        </form>
+        <a href="{% url 'register' %}"> Don't have an account?</a>
+{% endif %}
+</div>
+{% endblock %}

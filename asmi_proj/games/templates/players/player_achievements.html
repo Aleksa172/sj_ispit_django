@@ -1,0 +1,36 @@
+{% extends "../base.html" %}
+
+{% block title %} Achievementtrack - {{ profile.username }} achievements {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ profile.username }}'s {{ game.name }} achievements</h1>
+            {% for achievement in achievement_list %}
+            <div>
+
+            
+                <input type="checkbox" 
+                    name="choice" 
+                    id="choice{{ forloop.counter }}" 
+                    value="{{ achievement.id }}"
+                    disabled
+                    {% if achievement in profile_achievement_list %} checked {% endif %}>
+                
+                <label for="choice{{ forloop.counter }}">
+                    {{ achievement.name }}
+                    
+                </label>
+                {% if achievement in user_achievement_list %}
+                    <span>
+                       - You have this one. Well done!
+                    </span>
+                {% endif %}
+                <br>
+
+
+               
+            </div>
+            {% endfor %}
+    </form>
+</div>
+{% endblock %}

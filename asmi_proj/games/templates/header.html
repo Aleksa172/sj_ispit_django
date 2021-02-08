@@ -1,0 +1,25 @@
+{% load static %}
+<div class="container">
+    <div class="header-wrap">
+        <a href="{% url 'root_index' %}"> <img class="main-logo" src="{% static 'logo.png' %}"> </a>
+        <h3>ACHIEVEMENT-TRACK</h3>
+        <div class="auth-wrap">
+            {% if user.is_authenticated %}
+                Welcome, {{ user.username }}
+                <a href="{% url 'logout' %}" class="btn btn-default" role="button">Logout</a>
+                
+                <br/>
+                
+                <div>
+
+                    Your profile <a href="http://localhost{% url 'player_games' user.id %}">link</a>
+                </div>
+                
+                </script>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-default" role="button">Log in / Register</a>
+            {% endif %}
+         </div>
+    </div>
+    
+</div>

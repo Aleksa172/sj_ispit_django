@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} ACHIEVEMENT-TRACK - Profiles {% endblock %}
+
+{% block content %}
+<div class="container">
+    
+    {% if profile_list is None %}
+        <h3> There are no profiles at this time. </h3>
+        <a href="{% url 'root_index' %}">Back to home</a>
+    {% else %}
+        <h3> Profiles </h3>
+        <div>
+            Search profiles:
+            <form method="GET" action="{% url 'list_profiles' %}">
+                <input type="text" name="search">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        {% if search is not None %}
+            <h4>
+                List of profiles containing '{{ search }}'
+            </h4>
+        {% endif %}
+        {% for profile in profile_list %}
+            <div class="profile-container">
+                <a class="unlink" href="{% url 'player_games' usr_id=profile.id %}"> <span class="profile-name">{{ profile.username }}</span> </a>
+                
+                <hr/>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

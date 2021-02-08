@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} All games {% endblock %}
+
+{% block content %}
+<div class="container">
+    
+    {% if games_list is None %}
+        <h3>{{ profile.username }} has no listed games. </h3>
+        <a href="{% url 'root_index' %}">Back to home</a>
+    {% else %}
+        <h3>{{ profile.username }}'s games </h3>
+        {% for game in games_list %}
+            <div class="game-container">
+                <a class="unlink" href="{% url 'player_achievements' usr_id=profile.id game_id=game.id %}"> <span class="game-title">{{ game.name }}</span> </a> <span class="game-release-year">({{ game.release_year }})</span> 
+                
+                <hr/>
+                <h4> About the game </h4> 
+                <p> {{ game.description }} </p>
+                <a href="{% url 'games_details' game_id=game.id %}">View more...</a>
+
+                <div>
+                    <a href="{% url 'player_achievements' usr_id=profile.id game_id=game.id %}" class="btn btn-default" role="button">View {{ profile.username }}'s achievements</a>
+                </div>
+
+                {% if user.is_authenticated %}
+                    {% if game in user_games_list %}
+                        <div>
+                            <a href="{% url 'myachievements' game_id=game.id %}" class="btn btn-default" role="button">My achievements</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                
+                <hr/>
+          </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

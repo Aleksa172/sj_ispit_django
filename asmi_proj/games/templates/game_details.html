@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Game - {{ game.name }} {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    <h1>{{ game.name }} 
+        {% if user_has_game %}
+            <div>
+                <a href="{% url 'mygame_remove' game_id=game.id %}" class="btn btn-danger" role="button">Remove game</a>
+            </div>
+        {% endif %}
+
+    </h1>
+    
+    <div class="container">
+        <p> {{ game.description }} </p>
+    </div>
+    {% if game.steam_link %}
+        <div class="container">
+            <a target="_blank" href="{{ game.steam_link }}">
+                <img class="steam-logo" src="{% static 'steam.png' %}"/>
+            </a>
+        </div>
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+        {% if user_has_game %}
+            <div>
+                <a href="{% url 'myachievements' game_id=game.id %}" class="btn btn-default" role="button">My achievements</a>
+            </div>
+
+        {% else %}
+            <div>
+                Do you own this game?
+                Why don't you <a href="{% url 'mygame_add' game_id=game.id %}" >add it to your library</a> ?
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+    <h2> Recent News </h2>
+    {% if news_list is None %}
+        
+            <h4> There are no news for this game at the moment. </h4>
+            <h6> Please check back later! </h6>
+        
+    {% else %}
+        {% for news in news_list %}
+            <h2>
+                <a href="{{ news.get_absolute_url }}">
+                {{ news.title }}
+                </a>
+            </h2>
+            <p>{{ news.content|slice:"100" }} </p>
+        {% endfor %}
+    {% endif %}
+
+    
+</div>
+{% endblock %}

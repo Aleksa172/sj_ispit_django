@@ -1,0 +1,38 @@
+{% extends "../base.html" %}
+
+{% block title %} Achievementtrack - My achievements {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        
+    {% endif %}
+
+    {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    <h1>Your {{ game.name }} achievements</h1>
+
+    <form action="{% url 'myachievements' game_id=game.id %}" method="post">
+        {% csrf_token %}
+            {% for achievement in achievement_list %}
+                <input type="checkbox" 
+                    name="choice" 
+                    id="choice{{ forloop.counter }}" 
+                    value="{{ achievement.id }}"
+                    {% if achievement in user_achievement_list %} checked {% endif %}>
+                
+                <label for="choice{{ forloop.counter }}">{{ achievement.name }}</label><br>
+            {% endfor %}
+        <input type="submit" value="Save progress">
+    </form>
+</div>
+{% endblock %}

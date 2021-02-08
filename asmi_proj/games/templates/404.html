@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Page not found {% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2> Oops! </h2>
+    <p>We can't find the page you are looking for. 🤷</p>
+    <p>Maybe you are looking for something that doesn't exist? Or the gremlins took it?</p>
+    <p>Or the person stopped existing?</p>
+    <div>Who knows!</div>
+    <div>
+        But you can go back safety <a href="{% url 'root_index' %}"> here</a>
+    </div>
+  </div>
+{% endblock %}
