@@ -8,7 +8,7 @@ from django.dispatch import receiver
 # Create your models here.
 class PlayerUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    achievements = models.ManyToManyField(gameModels.Achievement)
+    achievements = models.ManyToManyField(gameModels.Achievement, through='Achiobtained')
     games = models.ManyToManyField(gameModels.Game)
 
     def __str__(self):
@@ -16,6 +16,12 @@ class PlayerUser(models.Model):
 
     def hasGame(self, game_id):
         return self.games.filter(id=game_id).exists()
+
+class Achiobtained(models.Model):
+    achievement = models.ForeignKey(gameModels.Achievement, on_delete=models.CASCADE)
+    playeruser = models.ForeignKey(PlayerUser, on_delete=models.CASCADE)
+    dateachieved = models.DateTimeField(auto_now_add=True)
+
 
 @receiver(post_save, sender=User)
 def create_user_player_user(sender, instance, created, **kwargs):

@@ -245,7 +245,7 @@ def player_profile_achievements(request, usr_id, game_id):
     return render(request, 'players/player_achievements.html', {'game': game, 
         'profile': profile,
         'achievement_list': achievement_list, 
-        'profile_achievements_list': profile_achievement_list, 
+        'profile_achievement_list': profile_achievement_list, 
         'user_achievement_list': user_achievement_list})
 
 
